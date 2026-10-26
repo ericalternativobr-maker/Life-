@@ -487,4 +487,11 @@ nav::after{content:'';position:absolute;left:0;right:0;top:100%;height:160px;bac
 nav{position:fixed;left:0;right:0;bottom:0;width:100%;max-width:560px;margin:0 auto;padding-bottom:calc(var(--s1) + env(safe-area-inset-bottom,0px))}
 main{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 </style>
+<style>
+/* Menu: barra opaca até a borda e menos folga sob os rótulos (estilo tab bar nativa do iOS) */
+nav{background:color-mix(in srgb,var(--c) 94%,var(--s));border-top:1px solid var(--ov);padding-top:var(--s1);padding-bottom:calc(4px + env(safe-area-inset-bottom,0px)*.5)}
+nav::after{background:color-mix(in srgb,var(--c) 94%,var(--s));height:240px}
+main{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px)*.5)}
+.fab{bottom:calc(80px + env(safe-area-inset-bottom,0px)*.5)}
+</style>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})</script></body></html>
