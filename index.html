@@ -473,4 +473,12 @@ R();
 b+.mut,b+div.mut{margin-top:var(--s1)}
 @media(max-width:359px){.card>.set{gap:var(--s1)}}
 </style>
+<style>
+/* Menu sempre encostado na base: fundo do menu se estende até a borda real da tela */
+html{background:var(--s);min-height:-webkit-fill-available}
+body{min-height:-webkit-fill-available}
+#app{height:100dvh;bottom:auto}
+nav{position:relative;background:color-mix(in srgb,var(--c) 86%,transparent)}
+nav::after{content:'';position:absolute;left:0;right:0;top:100%;height:160px;background:color-mix(in srgb,var(--c) 86%,transparent)}
+</style>
 <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})</script></body></html>
