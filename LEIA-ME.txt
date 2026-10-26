@@ -1,0 +1,18 @@
+Life+ no iPhone, sem publicar na internet
+
+O iPhone nao instala app a partir de um arquivo baixado. Ele precisa abrir o app por um endereco.
+Para manter tudo privado, use o seu proprio computador como servidor, na mesma rede Wi-Fi do iPhone:
+
+1. Extraia esta pasta no computador.
+2. Abra o Terminal (Mac) ou Prompt de Comando (Windows) dentro da pasta e rode:
+     Mac:      python3 -m http.server 8080
+     Windows:  python -m http.server 8080
+3. Descubra o IP do computador (Mac: Ajustes > Wi-Fi > Detalhes; Windows: ipconfig). Ex.: 192.168.0.15
+4. No iPhone, abra o Safari e acesse  http://192.168.0.15:8080
+5. Toque em Compartilhar > Adicionar a Tela de Inicio > Adicionar.
+6. Abra pelo icone Life+ (tela cheia).
+
+Observacoes:
+- Por esse metodo o computador precisa estar ligado e com o servidor rodando sempre que voce abrir o app.
+- Os dados ficam salvos no iPhone.
+- Para usar sem o computador ligado, hospede a pasta em HTTPS (ex.: Netlify Drop, com link nao listado).

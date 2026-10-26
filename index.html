@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Life+"><meta name="theme-color" content="#141218"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Life+</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<style>
+:root{--p:#6750A4;--op:#fff;--pc:#EADDFF;--opc:#4F378A;--sc:#E8DEF8;--osc:#4A4459;--ov:#CAC4D0;--s:#FEF7FF;--os:#1D1B20;--sv:#E7E0EC;--osv:#49454F;--ol:#79747E;--er:#B3261E;--c:#F3EDF7;--ok:#386A20;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--p:#D0BCFF;--op:#381E72;--pc:#4F378B;--opc:#EADDFF;--sc:#4A4458;--s:#141218;--os:#E6E0E9;--sv:#49454F;--osv:#CAC4D0;--ol:#938F99;--er:#F2B8B5;--c:#211F26;--ok:#A8DB8F;--ov:#49454F;--osc:#E8DEF8}}
+:root[data-theme=dark]{--p:#D0BCFF;--op:#381E72;--pc:#4F378B;--opc:#EADDFF;--sc:#4A4458;--s:#141218;--os:#E6E0E9;--sv:#49454F;--osv:#CAC4D0;--ol:#938F99;--er:#F2B8B5;--c:#211F26;--ok:#A8DB8F;--ov:#49454F;--osc:#E8DEF8}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:var(--s);color:var(--os);font:400 14px/20px Roboto,system-ui,sans-serif;letter-spacing:.25px;display:flex;justify-content:center}
+#app{width:100%;height:100%;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 6px}
+h1{font:400 28px/36px Roboto,system-ui;margin:0}h2{font:500 16px/24px Roboto,system-ui;letter-spacing:.15px;margin:0 0 8px}
+main{flex:1;overflow-y:auto;padding:8px 16px 20px}
+nav{display:flex;background:var(--c);padding:12px 8px 16px}
+nav button{flex:1;background:none;border:0;color:var(--osv);font:500 12px/16px Roboto,system-ui;letter-spacing:.5px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+nav button i{font-style:normal;font-size:18px;padding:4px 0;width:64px;text-align:center;border-radius:16px}
+nav button.on{color:var(--os)}nav button.on i{background:var(--sc)}
+.card{background:var(--c);border-radius:12px;padding:16px;margin-bottom:12px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px}
+.chip{border:1px solid var(--ov);background:none;color:var(--osv);border-radius:8px;height:32px;padding:0 16px;font:500 14px/20px Roboto,system-ui;letter-spacing:.1px;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--sc);color:var(--osc);border-color:var(--sc)}
+.btn{background:var(--p);color:var(--op);border:0;border-radius:20px;height:40px;padding:0 24px;font:500 14px/20px Roboto,system-ui;letter-spacing:.1px;cursor:pointer}
+.btn.t{background:none;color:var(--p);padding:8px 12px}
+input,select{background:var(--sv);color:var(--os);border:0;border-bottom:2px solid var(--ol);border-radius:4px 4px 0 0;padding:12px 16px;min-height:48px;font:400 16px/24px Roboto,system-ui;letter-spacing:.5px;width:100%;min-width:0}
+.row{display:flex;gap:8px;align-items:center}.sp{justify-content:space-between}
+.set{display:grid;grid-template-columns:24px 1fr 1fr 40px;gap:8px;align-items:center;margin:6px 0}
+.ck{width:40px;height:40px;border-radius:50%;border:2px solid var(--ol);background:none;color:var(--op);cursor:pointer}
+.ck.on{background:var(--p);border-color:var(--p)}
+.mut{color:var(--osv);font-size:12px}.big{font:400 28px/36px Roboto,system-ui}
+.ok{color:var(--ok)}.bad{color:var(--er)}
+table{width:100%;border-collapse:collapse}td,th{padding:12px 4px;border-bottom:1px solid var(--ov);text-align:left}th{font:500 12px system-ui;color:var(--osv)}td:last-child,th:last-child{text-align:right}
+.bar{height:8px;background:var(--sv);border-radius:4px;overflow:hidden;margin:8px 0}.bar b{display:block;height:100%;background:var(--p)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.lb{font-size:12px;color:var(--osv);display:block;margin:8px 0 2px}
+.sc{border:2px solid transparent;cursor:pointer}.sc.on{border-color:var(--p);background:var(--pc);color:var(--opc)}
+.x{background:none;border:0;color:var(--er);font-size:18px;cursor:pointer}
+</style></head><body><div id="splash"><svg width="96" height="96" viewBox="0 0 96 96"><defs><linearGradient id="lgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B69DF8"/><stop offset="1" stop-color="#6750A4"/></linearGradient></defs><rect x="4" y="4" width="88" height="88" rx="28" fill="url(#lgg)"/><rect x="4.5" y="4.5" width="87" height="87" rx="27.5" fill="none" stroke="#fff" stroke-opacity=".5"/><path d="M18 54h16l8-18 12 34 8-16h16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M68 18v14M61 25h14" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/></svg><h1>Life+</h1></div><div id="app">
+<header><h1 id="ttl"></h1><button class="btn t" onclick="th()">🌓</button></header>
+<main id="m"></main>
+<nav id="nv"></nav></div>
+<script>
+const $=s=>document.querySelector(s),N=[['t','🏋️','Treino'],['f','💰','Finanças'],['d','🥗','Dieta'],['s','💊','Saúde']];
+const DN=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],MN=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+let tab='t',day=new Date().getDay(),cur=0,cex='Supino reto',pick=-1,plan=null,sc=null;
+const mk=(n,s,r,h)=>({n,s,r,h,sets:Array.from({length:s},()=>({w:'',r:'',d:0}))});
+const W={1:[mk('Supino reto',4,'8-10',[60,62,65,65,67,70]),mk('Crucifixo',3,'12',[14,14,16,16,18,18]),mk('Tríceps corda',3,'12',[25,27,27,30,30,32])],
+3:[mk('Agachamento',4,'8',[80,85,85,90,95,100]),mk('Leg press',4,'12',[180,200,200,220,220,240])],
+5:[mk('Puxada frente',4,'10',[50,52,55,55,57,60]),mk('Remada curvada',4,'10',[40,42,45,45,47,50]),mk('Rosca direta',3,'12',[20,20,22,22,24,24])]};
+const F=[{n:'Salário',v:6500,a:-99,b:null},{n:'Freelance',v:800,a:0,b:0},{n:'Aluguel',v:-1800,a:-99,b:null},{n:'Cartão de crédito',v:-1250,a:-99,b:null},{n:'Parcela notebook',v:-350,a:-4,b:3},{n:'Internet',v:-120,a:-99,b:null},{n:'Academia',v:-110,a:-99,b:null}];
+let BANK=4200;
+const P={sexo:'M',peso:80,altura:178,idade:30,obj:'perder',ativ:1.55};
+const MED=[{n:'Amoxicilina 500mg',h:'8h · 16h · 24h',total:21,taken:12},{n:'Vitamina D 2000UI',h:'Manhã',total:60,taken:41},{n:'Omeprazol 20mg',h:'Jejum',total:14,taken:3}];
+const brl=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+function th(){const r=document.documentElement,d=matchMedia('(prefers-color-scheme:dark)').matches;const c=r.dataset.theme||(d?'dark':'light');r.dataset.theme=c=='dark'?'light':'dark'}
+function go(t){tab=t;R()}
+function R(){$('#nv').innerHTML=N.map(([k,i,l])=>`<button class="${k==tab?'on':''}" onclick="go('${k}')"><i>${i}</i>${l}</button>`).join('');
+$('#ttl').textContent=N.find(n=>n[0]==tab)[2];$('#m').innerHTML={t:vT,f:vF,d:vD,s:vS}[tab]()}
+/* TREINO */
+function vT(){const L=W[day]||[],all=Object.values(W).flat();
+const vol=L.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(s.d?(+s.w||0)*(+s.r||0):0),0),0);
+const ex=all.find(e=>e.n==cex)||all[0],h=ex?ex.h:[],mx=Math.max(...h,1),mn=Math.min(...h,0);
+const pts=h.map((v,i)=>`${20+i*(260/Math.max(h.length-1,1))},${100-(v-mn)/(mx-mn||1)*80}`).join(' ');
+return `<div class="chips">${DN.map((d,i)=>`<button class="chip ${i==day?'on':''}" onclick="day=${i};R()">${d}${i==new Date().getDay()?' •':''}</button>`).join('')}</div>
+${L.length?`<div class="card"><div class="row sp"><h2>Treino de ${DN[day]}</h2><span class="mut">Volume ${vol} kg</span></div>
+${L.map((e,i)=>`<div style="margin-top:12px"><b>${e.n}</b> <span class="mut">${e.s}×${e.r} · última ${e.h.at(-1)} kg</span>
+${e.sets.map((s,j)=>`<div class="set"><span class="mut">${j+1}</span><input type="number" placeholder="kg" value="${s.w}" oninput="W[day][${i}].sets[${j}].w=this.value"><input type="number" placeholder="reps" value="${s.r}" oninput="W[day][${i}].sets[${j}].r=this.value"><button class="ck ${s.d?'on':''}" onclick="W[day][${i}].sets[${j}].d^=1;R()">✓</button></div>`).join('')}</div>`).join('')}</div>`
+:`<div class="card"><h2>Descanso 😴</h2><p class="mut">Nenhum treino em ${DN[day]}. Adicione abaixo.</p></div>`}
+<div class="card"><div class="row sp"><h2>Evolução de cargas</h2><select style="width:60%" onchange="cex=this.value;R()">${all.map(e=>`<option ${e.n==cex?'selected':''}>${e.n}</option>`).join('')}</select></div>
+${ex?`<svg viewBox="0 0 300 120" width="100%"><polyline points="${pts}" fill="none" stroke="var(--p)" stroke-width="3"/>${pts.split(' ').map(p=>`<circle cx="${p.split(',')[0]}" cy="${p.split(',')[1]}" r="4" fill="var(--p)"/>`).join('')}</svg>
+<div class="mut">${h[0]} kg → <b class="ok">${h.at(-1)} kg (+${h.at(-1)-h[0]} kg)</b> em ${h.length} treinos</div>`:''}</div>
+<div class="card"><h2>Gerenciar treino de ${DN[day]}</h2>
+${L.map((e,i)=>`<div class="row sp"><span>${e.n} · ${e.s}×${e.r}</span><button class="x" onclick="W[day].splice(${i},1);R()">✕</button></div>`).join('')}
+<div class="row" style="margin-top:10px"><input id="en" placeholder="Novo exercício"><input id="es" type="number" placeholder="Séries" style="width:90px"></div>
+<button class="btn" style="margin-top:10px" onclick="addE()">Adicionar</button></div>`}
+function addE(){const n=$('#en').value.trim();if(!n)return;(W[day]=W[day]||[]).push(mk(n,+$('#es').value||3,'10',[0]));R()}
+/* FINANÇAS */
+function vF(){const on=F.filter(f=>cur>=f.a&&(f.b==null||cur<=f.b)),i=on.filter(f=>f.v>0).reduce((a,f)=>a+f.v,0),o=on.filter(f=>f.v<0).reduce((a,f)=>a+f.v,0),r=i+o;
+let acc=BANK;for(let k=0;k<=cur;k++)acc+=F.filter(f=>k>=f.a&&(f.b==null||k<=f.b)).reduce((a,f)=>a+f.v,0);
+const d=new Date(2026,9+cur,1),lbl=MN[d.getMonth()]+'/'+d.getFullYear();
+return `<div class="card"><div class="mut">Total em banco hoje</div><div class="big">${brl(BANK)}</div><div class="mut">Salário a receber: <b>${brl(6500)}</b></div></div>
+<div class="row sp" style="margin-bottom:8px"><button class="btn t" onclick="cur--;R()">‹</button><b>${lbl}</b><button class="btn t" onclick="cur++;R()">›</button></div>
+<div class="g2"><div class="card"><div class="mut">Entradas</div><b class="ok">${brl(i)}</b></div><div class="card"><div class="mut">Saídas</div><b class="bad">${brl(o)}</b></div></div>
+<div class="card" style="background:var(--pc);color:var(--opc)"><div>${r>=0?'Lucro':'Prejuízo'} do mês</div><div class="big ${r>=0?'ok':'bad'}">${brl(r)}</div><div style="font-size:12px">Saldo projetado no fim do mês: <b>${brl(acc)}</b></div></div>
+<div class="card"><h2>Contas ativas</h2><table><tr><th>Conta</th><th>Tipo</th><th>Valor</th></tr>${on.map(f=>`<tr><td>${f.n}</td><td class="mut">${f.b==null?'Fixa':'Até '+MN[new Date(2026,9+f.b,1).getMonth()]}</td><td class="${f.v>0?'ok':'bad'}">${brl(f.v)}</td></tr>`).join('')}</table></div>
+<div class="card"><h2>Nova conta</h2><div class="row"><input id="fn" placeholder="Nome"><input id="fv" type="number" placeholder="R$"></div>
+<div class="row" style="margin-top:8px"><select id="ft"><option value="-1">Saída</option><option value="1">Entrada</option></select><select id="fr"><option>Fixa</option><option>Só este mês</option></select></div>
+<button class="btn" style="margin-top:10px" onclick="addF()">Adicionar</button></div>`}
+function addF(){const n=$('#fn').value.trim(),v=+$('#fv').value;if(!n||!v)return;const o=$('#fr').value!='Fixa';F.push({n,v:Math.abs(v)*$('#ft').value,a:o?cur:-99,b:o?cur:null});R()}
+/* DIETA */
+function tdee(){return(10*P.peso+6.25*P.altura-5*P.idade+(P.sexo=='M'?5:-161))*P.ativ}
+const SC=[{n:'Déficit leve',f:.85,o:'perder'},{n:'Manutenção',f:1,o:'manter'},{n:'Ganho limpo',f:1.1,o:'ganhar'}];
+const ML=[['Café da manhã',.25,'Ovos, pão integral, fruta'],['Lanche',.1,'Iogurte e castanhas'],['Almoço',.3,'Arroz, feijão, frango, salada'],['Pré-treino',.1,'Banana, aveia, whey'],['Jantar',.25,'Carne magra, batata-doce, legumes']];
+function vD(){const g=SC.map((s,i)=>{const k=Math.round(tdee()*s.f),p=Math.round(P.peso*2),f=Math.round(k*.25/9);return{...s,i,k,p,f,c:Math.round((k-p*4-f*9)/4)}});
+const f=(k,l,t='number')=>`<div><span class="lb">${l}</span><input type="${t}" value="${P[k]}" onchange="P[k]=${t=='number'?'+':''}this.value"></div>`.replace(/\[k\]/g,'['+JSON.stringify(k)+']');
+return `<div class="card"><h2>Meus dados</h2><div class="g2">${f('peso','Peso (kg)')}${f('altura','Altura (cm)')}${f('idade','Idade')}
+<div><span class="lb">Sexo</span><select onchange="P.sexo=this.value"><option value="M" ${P.sexo=='M'?'selected':''}>Masculino</option><option value="F" ${P.sexo=='F'?'selected':''}>Feminino</option></select></div></div>
+<span class="lb">Objetivo</span><select onchange="P.obj=this.value"><option value="perder" ${P.obj=='perder'?'selected':''}>Perder gordura</option><option value="manter" ${P.obj=='manter'?'selected':''}>Manter peso</option><option value="ganhar" ${P.obj=='ganhar'?'selected':''}>Ganhar massa</option></select>
+<button class="btn" style="margin-top:12px" onclick="sc=1;plan=null;R()">✨ Gerar cenários com IA</button></div>
+${sc?`<h2>Cenários sugeridos</h2>${g.map(s=>`<div class="card sc ${pick==s.i?'on':''}" onclick="pick=${s.i};R()"><div class="row sp"><b>${s.n}</b>${s.o==P.obj?'<span class="mut">⭐ recomendado</span>':''}</div><div class="big">${s.k} kcal</div><div class="mut" style="color:inherit">P ${s.p}g · C ${s.c}g · G ${s.f}g</div></div>`).join('')}
+${pick>=0?`<button class="btn" onclick="plan=${pick};R()">Aplicar e registrar dieta</button>`:''}`:''}
+${plan!=null?`<div class="card" style="margin-top:12px"><h2>Dieta de hoje · ${g[plan].k} kcal</h2><table>${ML.map((m,i)=>`<tr><td><b>${m[0]}</b><div class="mut">${m[2]}</div></td><td>${Math.round(g[plan].k*m[1])} kcal</td></tr>`).join('')}</table></div>`:''}
+${sc?'<p class="mut">IA simulada no mockup (fórmula Mifflin-St Jeor). No app final, entra o modelo real.</p>':''}`}
+/* SAÚDE */
+function vS(){return MED.map((m,i)=>{const r=m.total-m.taken;return `<div class="card"><div class="row sp"><b>${m.n}</b><span class="mut">${m.h}</span></div>
+<div class="big">${r} <span class="mut">doses restantes</span></div><div class="bar"><b style="width:${m.taken/m.total*100}%"></b></div>
+<div class="row sp"><span class="mut">${m.taken}/${m.total} · ${r?'~'+Math.ceil(r/(m.h.split('·').length))+' dias para terminar':'Tratamento concluído ✅'}</span>
+${r?`<button class="btn" onclick="MED[${i}].taken++;R()">Tomei</button>`:''}</div></div>`}).join('')+`<div class="card"><h2>Novo remédio</h2><input id="mn" placeholder="Nome e dosagem"><div class="row" style="margin-top:8px"><input id="mt" type="number" placeholder="Total de doses"><input id="mh" placeholder="Horários"></div><button class="btn" style="margin-top:10px" onclick="addM()">Adicionar</button></div>`}
+function addM(){const n=$('#mn').value.trim(),t=+$('#mt').value;if(!n||!t)return;MED.push({n,h:$('#mh').value||'—',total:t,taken:0});R()}
+R();
+</script>
+<style>
+html,body{height:100dvh;overflow:hidden}
+#app{height:100dvh}
+#app::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(60% 38% at 12% 8%,color-mix(in srgb,var(--p) 34%,transparent),transparent),radial-gradient(50% 34% at 95% 55%,color-mix(in srgb,#E5487A 22%,transparent),transparent),radial-gradient(60% 40% at 25% 100%,color-mix(in srgb,#1FA971 22%,transparent),transparent)}
+main{padding:8px 16px 128px}
+nav{position:fixed;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);max-width:398px;margin:0 auto;padding:8px 6px;gap:2px;background:color-mix(in srgb,var(--c) 55%,transparent);-webkit-backdrop-filter:blur(26px) saturate(170%);backdrop-filter:blur(26px) saturate(170%);border:1px solid color-mix(in srgb,var(--os) 12%,transparent);border-radius:28px;box-shadow:0 10px 34px rgba(0,0,0,.18);z-index:5}
+nav button{padding:0;gap:3px;font:500 11px/14px Roboto,system-ui;letter-spacing:.3px}
+nav button.on{color:var(--os)}
+.gi{position:relative;width:52px;height:36px;border-radius:14px;display:grid;place-items:center;color:var(--ic);overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.35),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.5);opacity:.78;transition:.2s}
+.gi::before{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:var(--ic);filter:blur(12px);opacity:.3;left:6px;top:8px}
+.gi svg{position:relative;filter:drop-shadow(0 1px 2px color-mix(in srgb,var(--ic) 55%,transparent))}
+nav button.on .gi{opacity:1;background:linear-gradient(145deg,color-mix(in srgb,var(--ic) 32%,rgba(255,255,255,.35)),rgba(255,255,255,.06));border-color:color-mix(in srgb,var(--ic) 55%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 6px 18px color-mix(in srgb,var(--ic) 40%,transparent)}
+.card{background:color-mix(in srgb,var(--c) 62%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid color-mix(in srgb,var(--os) 8%,transparent);border-radius:20px}
+.btn{height:44px;border-radius:14px;padding:0 20px;transition:transform .1s}.btn:active{transform:scale(.97)}
+.btn.t{background:transparent;color:var(--p);padding:0 12px}
+input,select{background:color-mix(in srgb,var(--os) 6%,transparent);border:1px solid transparent;border-radius:12px;min-height:44px;padding:0 14px;outline:0;transition:border-color .15s;font-size:15px}
+input:focus,select:focus{border-color:var(--p)}
+input[type=number]{-moz-appearance:textfield}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.chip{border:0;background:color-mix(in srgb,var(--os) 7%,transparent);border-radius:12px;height:36px}
+.chip.on{background:var(--p);color:var(--op)}
+.ck{border-radius:12px;border:1.5px solid color-mix(in srgb,var(--os) 25%,transparent)}
+.sc.on{border-color:var(--p)}
+.mini{font-size:12px;color:var(--osv);margin:4px 0}
+</style>
+<script>
+const IC={t:['#7F67E0','<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>'],f:['#1FA971','<path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3M4 7.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 1 4 7.5z"/><circle cx="16.5" cy="13.5" r="1.2"/>'],d:['#F08A24','<path d="M12 7c-1.5-2-5-2-6 1-1 3 1 8 3.5 10 1 .8 1.8.5 2.5.2.7.3 1.5.6 2.5-.2 2.5-2 4.5-7 3.5-10-1-3-4.5-3-6-1z"/><path d="M12 7c0-1.5.8-3 2.5-3.5"/>'],s:['#E5487A','<rect x="3.5" y="9" width="17" height="6" rx="3" transform="rotate(-45 12 12)"/><path d="M9.2 9.2l5.6 5.6"/>']};
+let ico=k=>`<i class="gi" style="--ic:${IC[k][0]}"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${IC[k][1]}</svg></i>`;
+function R(){$('#nv').innerHTML=N.map(([k,i,l])=>`<button class="${k==tab?'on':''}" onclick="go('${k}')">${ico(k)}<span>${l}</span></button>`).join('');$('#ttl').textContent=N.find(n=>n[0]==tab)[2];$('#m').innerHTML={t:vT,f:vF,d:vD,s:vS}[tab]()}
+/* DIETA · regras ISSN (2017 proteína; 2026 perda de peso) */
+let eat={};
+const ACT=[[1.2,'Sedentário'],[1.375,'Leve (1–3x/sem)'],[1.55,'Moderado (3–5x/sem)'],[1.725,'Intenso (6–7x/sem)']];
+const SCN=[{n:'Cutting moderado',f:.8,p:2.2,g:.8,o:'perder'},{n:'Manutenção / recomposição',f:1,p:1.8,g:.9,o:'manter'},{n:'Lean bulk',f:1.1,p:1.8,g:.9,o:'ganhar'}];
+const MLS=[['Café da manhã',.22,'Ovos, aveia, fruta'],['Almoço',.3,'Arroz, feijão, frango ou peixe, salada'],['Lanche / pré-treino',.15,'Iogurte, banana, whey'],['Jantar',.25,'Carne magra, batata-doce, legumes'],['Ceia (caseína)',.08,'Cottage ou iogurte grego']];
+function gen(){const t=tdee(),fl=P.sexo=='M'?1500:1200;return SCN.map((s,i)=>{const k=Math.max(Math.round(t*s.f),fl),p=Math.round(P.peso*s.p),g=Math.round(Math.max(P.peso*s.g,k*.2/9)),c=Math.max(Math.round((k-p*4-g*9)/4),0);
+const meals=MLS.map(m=>{const kc=Math.round(k*m[1]),pm=Math.round(p/5),fm=Math.round(g*m[1]);return{n:m[0],f:m[2],kc,p:pm,c:Math.max(Math.round((kc-pm*4-fm*9)/4),0),g:fm}});
+return{...s,i,k,p,g,c,fib:Math.round(14*k/1000),w:((k-t)*7/7700).toFixed(2),meals}})}
+function vD(){const g=gen(),pl=plan!=null?g[plan]:null;
+const fld=(l,k)=>`<div><span class="lb">${l}</span><input type="number" value="${P[k]}" onchange="P.${k}=+this.value"></div>`;
+const done=pl?pl.meals.reduce((a,m,i)=>a+(eat[i]?m.kc:0),0):0,dp=pl?pl.meals.reduce((a,m,i)=>a+(eat[i]?m.p:0),0):0;
+return `<div class="card"><h2>Meus dados</h2><div class="g2">${fld('Peso (kg)','peso')}${fld('Altura (cm)','altura')}${fld('Idade','idade')}
+<div><span class="lb">Sexo</span><select onchange="P.sexo=this.value"><option value="M" ${P.sexo=='M'?'selected':''}>Masculino</option><option value="F" ${P.sexo=='F'?'selected':''}>Feminino</option></select></div></div>
+<span class="lb">Nível de atividade</span><select onchange="P.ativ=+this.value">${ACT.map(a=>`<option value="${a[0]}" ${P.ativ==a[0]?'selected':''}>${a[1]}</option>`).join('')}</select>
+<span class="lb">Objetivo</span><select onchange="P.obj=this.value"><option value="perder" ${P.obj=='perder'?'selected':''}>Perder gordura</option><option value="manter" ${P.obj=='manter'?'selected':''}>Manter / recompor</option><option value="ganhar" ${P.obj=='ganhar'?'selected':''}>Ganhar massa</option></select>
+<button class="btn" style="margin-top:14px;width:100%" onclick="sc=1;plan=null;eat={};pick=-1;R()">Gerar cenários com IA</button></div>
+${sc?`<h2>Cenários</h2>${g.map(s=>`<div class="card sc ${pick==s.i?'on':''}" onclick="pick=${s.i};R()"><div class="row sp"><b>${s.n}</b>${s.o==P.obj?'<span class="mut">recomendado</span>':''}</div>
+<div class="big">${s.k} kcal</div><div class="mut" style="color:inherit">P ${s.p}g · C ${s.c}g · G ${s.g}g · fibras ${s.fib}g</div><div class="mini">Variação estimada: ${s.w>0?'+':''}${s.w} kg/semana</div></div>`).join('')}
+${pick>=0?`<button class="btn" style="width:100%" onclick="plan=${pick};eat={};R()">Aplicar e registrar dieta</button>`:''}`:''}
+${pl?`<div class="card" style="margin-top:12px"><h2>Hoje · ${pl.n}</h2><div class="mini">Consumido ${done}/${pl.k} kcal · proteína ${dp}/${pl.p} g</div><div class="bar"><b style="width:${Math.min(done/pl.k*100,100)}%"></b></div>
+<table>${pl.meals.map((m,i)=>`<tr><td><b>${m.n}</b><div class="mut">${m.f}</div><div class="mut">${m.kc} kcal · P${m.p} C${m.c} G${m.g}</div></td><td><button class="ck ${eat[i]?'on':''}" onclick="eat[${i}]^=1;R()">✓</button></td></tr>`).join('')}</table></div>
+<div class="card"><h2>Regras aplicadas</h2><div class="mini">• Déficit moderado (~20%) e piso calórico, sem dietas muito restritivas.<br>• Proteína de 1,8–2,2 g/kg, dividida em 5 refeições (20–40 g cada), a cada 3–4 h.<br>• Ceia com proteína de digestão lenta (caseína 30–40 g).<br>• Gordura mínima de 0,8 g/kg e carboidrato no restante, mais perto do treino.<br>• Fibras: 14 g a cada 1.000 kcal.<br>• Base: posições da ISSN (2017 e 2026). Estimativa educativa, consulte um nutricionista.</div></div>`:''}
+${sc?'<p class="mini">IA simulada no mockup (Mifflin-St Jeor + regras acima).</p>':''}`}
+R();
+</script><style>
+/* Convenções Bootstrap 5.3: escala de espaçamento em rem, utilitários, navbar fixed-bottom, topo sticky */
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}
+.d-flex{display:flex}.justify-content-between{justify-content:space-between}.align-items-center{align-items:center}
+.gap-2{gap:.5rem}.mt-1{margin-top:.25rem}.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.small{font-size:.8125rem}
+.text-muted{color:var(--osv)}.text-end{text-align:right}.fs-5{font-size:1.25rem;line-height:1.5rem}.fw-semibold{font-weight:500}
+.badge{padding:.3rem .65rem;border-radius:999px;font:500 .75rem/1 Roboto,system-ui;background:color-mix(in srgb,currentColor 14%,transparent);white-space:nowrap}
+.badge.ok{color:var(--ok)}.badge.bad{color:var(--er)}
+.btn-sm{height:2rem;padding:0 .5rem;border-radius:.5rem;font-size:1.125rem}
+header{padding:.5rem 1rem .125rem}
+h1{font:500 1.25rem/1.75rem Roboto,system-ui}
+#top{padding:.25rem 1rem .625rem;background:color-mix(in srgb,var(--s) 72%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--os) 8%,transparent);z-index:4}
+#top .chips{padding-bottom:.375rem;margin:0}
+#top .bar{margin:.375rem 0 0;height:.375rem}
+main{padding:.75rem 1rem calc(5.5rem + env(safe-area-inset-bottom,0px))}
+.card{padding:1rem;margin-bottom:.75rem;border-radius:1rem}
+h2{font-size:1rem;margin-bottom:.5rem}
+nav{left:0;right:0;bottom:0;max-width:none;margin:0;border-radius:1.25rem 1.25rem 0 0;border-bottom:0;padding:.375rem .5rem calc(.375rem + env(safe-area-inset-bottom,0px))}
+.gi{width:3rem;height:2rem;border-radius:.75rem}
+.gi::before{left:.5rem;top:.35rem}
+</style>
+<script>
+if(!$('#top')){const d=document.createElement('div');d.id='top';$('header').after(d)}
+const vT0=vT,vF0=vF;
+vT=()=>vT0().replace(/<div class="chips">[\s\S]*?<\/div>/,'');
+vF=()=>{const p=vF0().split('<div class="g2">');return '<div class="g2">'+p.slice(1).join('<div class="g2">')};
+function fin(){const on=F.filter(f=>cur>=f.a&&(f.b==null||cur<=f.b)),r=on.reduce((a,f)=>a+f.v,0);const d=new Date(2026,9+cur,1);return{r,lbl:MN[d.getMonth()]+'/'+d.getFullYear()}}
+function ctx(){
+if(tab=='t'){const L=W[day]||[],ss=L.flatMap(e=>e.sets),dn=ss.filter(s=>s.d).length,vol=L.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(s.d?(+s.w||0)*(+s.r||0):0),0),0);
+return `<div class="chips">${DN.map((d,i)=>`<button class="chip ${i==day?'on':''}" onclick="day=${i};R()">${d}${i==new Date().getDay()?' •':''}</button>`).join('')}</div>
+<div class="d-flex justify-content-between small text-muted"><span>${L.length?L.length+' exercícios':'Descanso'}</span><span>${dn}/${ss.length} séries · ${vol} kg</span></div>`}
+if(tab=='f'){const x=fin();return `<div class="d-flex justify-content-between align-items-center"><div><div class="small text-muted">Total em banco</div><b class="fs-5">${brl(BANK)}</b></div><div class="text-end"><div class="small text-muted">Salário a receber</div><b>${brl(6500)}</b></div></div>
+<div class="d-flex justify-content-between align-items-center mt-1"><button class="btn t btn-sm" onclick="cur--;R()">‹</button><b>${x.lbl}</b><span class="badge ${x.r>=0?'ok':'bad'}">${x.r>=0?'Lucro':'Prejuízo'} ${brl(x.r)}</span><button class="btn t btn-sm" onclick="cur++;R()">›</button></div>`}
+if(tab=='d'){const pl=plan!=null?gen()[plan]:null;if(!pl)return '<div class="small text-muted">Preencha seus dados e gere um cenário.</div>';const k=pl.meals.reduce((a,m,i)=>a+(eat[i]?m.kc:0),0);
+return `<div class="d-flex justify-content-between small"><b>${pl.n}</b><span class="text-muted">${k}/${pl.k} kcal</span></div><div class="bar"><b style="width:${Math.min(k/pl.k*100,100)}%"></b></div>`}
+const rem=MED.reduce((a,m)=>a+m.total-m.taken,0);return `<div class="d-flex justify-content-between small"><b>${MED.length} tratamentos</b><span class="text-muted">${rem} doses restantes</span></div>`}
+function R(){$('#nv').innerHTML=N.map(([k,i,l])=>`<button class="${k==tab?'on':''}" onclick="go('${k}')">${ico(k)}<span>${l}</span></button>`).join('');$('#ttl').textContent=N.find(n=>n[0]==tab)[2];$('#top').innerHTML=ctx();$('#m').innerHTML={t:vT,f:vF,d:vD,s:vS}[tab]()}
+R();
+</script>
+<style>
+/* Escala 8pt (Bootstrap 5.3 com spacers redefinidos): 8 / 16 / 24 / 32 / 40 / 48 / 64 */
+:root{--s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:40px;--s6:48px;--s7:64px}
+/* topo */
+header{padding:var(--s2) var(--s2) var(--s1)}
+h1{margin:0;font:500 24px/32px Roboto,system-ui}
+header .btn{width:var(--s5);height:var(--s5);padding:0;border-radius:var(--s2)}
+#top{padding:var(--s1) var(--s2) var(--s2)}
+#top .chips{gap:var(--s1);padding:0 0 var(--s1);margin:0}
+#top .bar{height:var(--s1);margin:var(--s1) 0 0}
+#top .mt-1{margin-top:var(--s1)}
+#top .d-flex{gap:var(--s1)}
+/* conteúdo */
+main{padding:var(--s3) var(--s2) calc(var(--s7) + var(--s4) + env(safe-area-inset-bottom,0px))}
+main>h2{margin:var(--s3) 0 var(--s2)}
+.card{padding:var(--s3);margin-bottom:var(--s2);border-radius:var(--s3)}
+.card>h2{margin:0 0 var(--s2)}
+.card>*+*{margin-top:var(--s1)}
+.card>h2+*{margin-top:0}
+.card>.card,.g2>.card{margin-bottom:0}
+.g2{gap:var(--s2);margin-bottom:var(--s2)}
+.g2 .lb{margin:0 0 var(--s1)}
+.lb{display:block;margin:var(--s2) 0 var(--s1)}
+.row{gap:var(--s1)}
+.row.sp:has(.x){min-height:var(--s6)}
+.chips{gap:var(--s1)}
+.chip{height:var(--s5);padding:0 var(--s2);border-radius:var(--s2)}
+.big{margin:var(--s1) 0}
+.mini{margin:var(--s1) 0}
+.bar{height:var(--s1);margin:var(--s2) 0}
+.set{gap:var(--s1);margin:var(--s1) 0}
+.ck,.x{width:var(--s5);height:var(--s5)}
+.ck{border-radius:var(--s2)}
+/* campos e botões */
+input,select{min-height:var(--s6);padding:0 var(--s2);border-radius:var(--s2)}
+.btn{height:var(--s6);padding:0 var(--s3);border-radius:var(--s2)}
+.btn.t{padding:0 var(--s2)}
+.btn-sm{height:var(--s5);padding:0 var(--s1);border-radius:var(--s1)}
+[style*=margin-top]{margin-top:var(--s2)!important}
+.btn[style*=margin-top]{margin-top:var(--s3)!important}
+/* tabelas */
+td,th{padding:var(--s2) var(--s1)}
+th{padding-top:0}
+td>*+*{margin-top:var(--s1)}
+td:last-child,th:last-child{padding-right:0}
+/* rodapé */
+nav{padding:var(--s1) var(--s2) calc(var(--s1) + env(safe-area-inset-bottom,0px));border-radius:var(--s3) var(--s3) 0 0}
+nav button{gap:var(--s1)}
+.gi{width:var(--s7);height:var(--s4);border-radius:var(--s2)}
+.gi::before{left:19px;top:3px}
+/* seletor de dias */
+#top{padding-top:var(--s2)}
+#top .chips{padding:var(--s2);margin:0 0 var(--s2);gap:var(--s1);border-radius:var(--s3);background:color-mix(in srgb,var(--os) 6%,transparent);align-items:center;scrollbar-width:none}
+#top .chips::-webkit-scrollbar{display:none}
+#top .chip{height:var(--s6);min-width:var(--s6);padding:0 var(--s2);flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:transparent}
+#top .chip.on{background:var(--p)}
+#top .chips{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;overflow:visible;padding:var(--s2) var(--s1)}
+#top .chip{min-width:0;width:100%;padding:0;font-size:13px;letter-spacing:0}
+</style>
+<style>
+.gi{width:var(--s7);height:var(--s5);border-radius:20px;opacity:.92}
+.gi::before{width:32px;height:32px;left:16px;top:4px;filter:blur(14px);opacity:.5}
+.gi::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.55),rgba(255,255,255,0) 42%);pointer-events:none}
+.gi svg{width:30px;height:30px;filter:drop-shadow(0 3px 6px color-mix(in srgb,var(--ic) 55%,transparent))}
+nav button.on .gi{opacity:1;transform:translateY(-2px) scale(1.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 10px 26px color-mix(in srgb,var(--ic) 50%,transparent)}
+nav button .gi{transition:transform .2s,box-shadow .2s}
+</style>
+<script>
+const GL={t:['#C4B5FF','#6750A4',(G,c)=>`<rect x='1.5' y='14' width='4' height='8' rx='2' fill='${G}' fill-opacity='.7'/><rect x='30.5' y='14' width='4' height='8' rx='2' fill='${G}' fill-opacity='.7'/><rect x='10' y='15.5' width='16' height='5' rx='2.5' fill='#fff' fill-opacity='.5' stroke='#fff' stroke-opacity='.8'/><rect x='4.5' y='8' width='8' height='20' rx='3.5' fill='${G}' stroke='#fff' stroke-opacity='.7'/><rect x='23.5' y='8' width='8' height='20' rx='3.5' fill='${G}' stroke='#fff' stroke-opacity='.7'/><path d='M7 12v6M26 12v6' stroke='#fff' stroke-opacity='.85' stroke-width='1.6' stroke-linecap='round'/>`],
+f:['#7DF0C0','#0E9F6E',(G,c)=>`<rect x='3' y='8' width='30' height='21' rx='7' fill='${G}' stroke='#fff' stroke-opacity='.7'/><rect x='3' y='13' width='30' height='6' fill='#fff' fill-opacity='.3'/><circle cx='26' cy='25' r='7' fill='#fff' fill-opacity='.55' stroke='#fff' stroke-opacity='.9' stroke-width='1.2'/><circle cx='26' cy='25' r='3' fill='${G}'/><path d='M7 11.5h8' stroke='#fff' stroke-opacity='.85' stroke-width='1.6' stroke-linecap='round'/>`],
+d:['#FFC27A','#F0661A',(G,c)=>`<path d='M18 12c-2-2.8-8.5-2.5-10 3-1.5 5.6 1.5 13 5 15 1.5.9 3 .4 5 .4s3.5.5 5-.4c3.5-2 6.5-9.4 5-15-1.5-5.5-8-5.8-10-3z' fill='${G}' stroke='#fff' stroke-opacity='.7'/><path d='M18 12c0-3.5 1.8-5.8 5-6.5 0 3.5-1.8 6-5 6.5z' fill='#7BE495' stroke='#fff' stroke-opacity='.8'/><path d='M10.5 17c.5-2 1.8-3 3.5-3.2' stroke='#fff' stroke-opacity='.9' stroke-width='1.6' stroke-linecap='round' fill='none'/>`],
+s:['#FF9AB8','#E5336D',(G,c)=>`<g transform='rotate(-45 18 20)'><rect x='4' y='14' width='28' height='13' rx='6.5' fill='${G}' stroke='#fff' stroke-opacity='.7'/><path d='M18 14h7.5a6.5 6.5 0 0 1 0 13H18z' fill='#fff' fill-opacity='.55'/><path d='M9 17.5h6' stroke='#fff' stroke-opacity='.9' stroke-width='1.6' stroke-linecap='round'/></g><path d='M29 4v7M25.5 7.5h7' stroke='${c}' stroke-width='2' stroke-linecap='round'/>`]};
+ico=k=>{const [a,b,f]=GL[k];return `<i class='gi' style='--ic:${b}'><svg viewBox='0 0 36 36' fill='none'><defs><linearGradient id='g${k}' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${a}'/><stop offset='1' stop-color='${b}'/></linearGradient></defs>${f('url(#g'+k+')',b)}</svg></i>`};
+R();
+</script>
+<style>
+.gi,nav button .gi{--ic:var(--osv);color:var(--osv);opacity:1;transform:none;background:color-mix(in srgb,var(--os) 5%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,var(--os) 12%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.gi::before,.gi::after{display:none}
+.gi svg{width:26px;height:26px;filter:none}
+nav button.on .gi{--ic:var(--p);color:var(--p);transform:none;background:color-mix(in srgb,var(--p) 16%,transparent);border-color:color-mix(in srgb,var(--p) 34%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+nav button.on{color:var(--p)}
+</style>
+<script>
+const GP={t:'<rect x="4" y="7" width="4" height="10" rx="1.5"/><rect x="16" y="7" width="4" height="10" rx="1.5"/><path d="M8 12h8M2 10v4M22 10v4"/>',f:'<path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3M4 7.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 1 4 7.5z"/><circle cx="16.5" cy="13.5" r="1.2"/>',d:'<path d="M12 7c-1.5-2-5-2-6 1-1 3 1 8 3.5 10 1 .8 1.8.5 2.5.2.7.3 1.5.6 2.5-.2 2.5-2 4.5-7 3.5-10-1-3-4.5-3-6-1z"/><path d="M12 7c0-1.5.8-3 2.5-3.5"/>',s:'<rect x="3.5" y="9" width="17" height="6" rx="3" transform="rotate(-45 12 12)"/><path d="M9.2 9.2l5.6 5.6"/>'};
+ico=k=>`<i class="gi"><svg viewBox="0 0 24 24" fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${GP[k]}</svg></i>`;
+R();
+</script>
+<style>
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:21;max-height:88dvh;overflow:auto;padding:var(--s3) var(--s2) calc(var(--s3) + env(safe-area-inset-bottom,0px));border-radius:var(--s3) var(--s3) 0 0;background:color-mix(in srgb,var(--s) 86%,transparent);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border:1px solid color-mix(in srgb,var(--os) 10%,transparent);box-shadow:0 -16px 48px rgba(0,0,0,.25)}
+.fab{position:fixed;right:var(--s2);bottom:calc(96px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:20px;border:1px solid color-mix(in srgb,var(--p) 40%,transparent);background:color-mix(in srgb,var(--p) 80%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--op);font:300 32px/1 Roboto,system-ui;z-index:6;box-shadow:0 8px 24px color-mix(in srgb,var(--p) 35%,transparent);cursor:pointer}
+#top .dchips{display:flex;overflow-x:auto;padding:var(--s2) var(--s1)}
+#top .dchips .chip{width:auto;padding:0 var(--s2);flex:0 0 auto}
+tr[onclick]{cursor:pointer}
+.btn.t.dng{color:var(--er)}
+</style>
+<button id="fab" class="fab" onclick="add()">+</button><div id="sh"></div>
+<script>
+let SH=null,DT=[],di=0,dnew=true;
+const V=id=>$('#'+id).value,q=v=>String(v).replace(/"/g,'&quot;');
+const inp=(id,l,v='',t='text')=>`<span class="lb">${l}</span><input id="${id}" type="${t}" ${t=='number'?'inputmode="decimal"':''} value="${q(v)}">`;
+const red='style="color:var(--er)"';
+function openS(t,h,s){SH={s};$('#sh').innerHTML=`<div class="ov" onclick="closeS()"></div><div class="sheet"><div class="d-flex justify-content-between align-items-center"><h2 style="margin:0">${t}</h2><button class="btn t btn-sm" onclick="closeS()">✕</button></div>${h}<button class="btn" style="width:100%" onclick="SH.s()">Salvar</button></div>`}
+function closeS(){SH=null;$('#sh').innerHTML=''}
+function add(){({t:()=>exSheet(-1),f:()=>finSheet(-1),s:()=>medSheet(-1)})[tab]()}
+const R0=R;R=function(){R0();$('#fab').style.display=tab=='d'?'none':'block'};
+/* TREINO */
+function exSheet(i){const e=i>=0?W[day][i]:{n:'',s:3,r:'10'};
+openS(i>=0?'Editar exercício':'Novo exercício em '+DN[day],inp('xn','Nome',e.n)+`<div class="g2"><div>${inp('xs','Séries',e.s,'number')}</div><div>${inp('xr','Repetições por série',e.r,'number')}</div></div>`+(i>=0?`<button class="btn t dng" style="margin-top:16px" onclick="W[day].splice(${i},1);closeS();R()">Excluir exercício</button>`:''),
+()=>{const n=V('xn').trim();if(!n)return;const s=Math.max(1,+V('xs')||3),r=V('xr')||'10';
+if(i>=0){const x=W[day][i];x.n=n;x.r=r;while(x.sets.length<s)x.sets.push({w:'',r:'',d:0});x.sets.length=s;x.s=s}else(W[day]=W[day]||[]).push(mk(n,s,r,[0]));closeS();R()})}
+const vT1=vT;
+vT=()=>{const h=vT1(),a=h.indexOf('<div class="card"><div class="row sp"><h2>Evolução'),b=h.indexOf('<div class="card"><h2>Gerenciar'),L=W[day]||[];
+return (L.length?L.map((e,i)=>`<div class="card"><div class="d-flex justify-content-between align-items-center"><div><b>${e.n}</b><div class="mut">${e.s} séries × ${e.r} reps · última ${e.h.at(-1)} kg</div></div><button class="btn t btn-sm" onclick="exSheet(${i})">⋯</button></div>
+<div class="set mut"><span>#</span><span>Carga (kg)</span><span>Reps</span><span></span></div>
+${e.sets.map((s,j)=>`<div class="set"><span class="mut">${j+1}</span><input type="number" inputmode="decimal" placeholder="kg" value="${s.w}" oninput="W[day][${i}].sets[${j}].w=this.value"><input type="number" inputmode="numeric" placeholder="${e.r}" value="${s.r}" oninput="W[day][${i}].sets[${j}].r=this.value"><button class="ck ${s.d?'on':''}" onclick="W[day][${i}].sets[${j}].d^=1;R()">✓</button></div>`).join('')}</div>`).join(''):`<div class="card"><h2>Descanso</h2><div class="mut">Nenhum treino em ${DN[day]}. Toque no + para adicionar.</div></div>`)+h.slice(a,b)}
+/* FINANÇAS */
+function finSheet(i){const f=i>=0?F[i]:{n:'',v:0,a:-99,b:null};
+openS(i>=0?'Editar conta':'Nova conta',inp('fn','Nome',f.n)+inp('fv','Valor (R$)',Math.abs(f.v)||'','number')+`<span class="lb">Tipo</span><select id="ft"><option value="-1">Saída</option><option value="1" ${f.v>0?'selected':''}>Entrada</option></select><span class="lb">Recorrência</span><select id="fr">${i>=0?'<option value="k">Manter atual</option>':''}<option value="f">Fixa todo mês</option><option value="m">Só este mês</option></select>`+(i>=0?`<button class="btn t dng" style="margin-top:16px" onclick="F.splice(${i},1);closeS();R()">Excluir conta</button>`:''),
+()=>{const n=V('fn').trim(),v=Math.abs(+V('fv'));if(!n||!v)return;const o={n,v:v*(+V('ft'))},r=V('fr');
+if(r=='m'){o.a=cur;o.b=cur}else if(r=='k'){o.a=f.a;o.b=f.b}else{o.a=-99;o.b=null}
+if(i>=0)F[i]=o;else F.push(o);closeS();R()})}
+const vF1=vF;
+vF=()=>{const h=vF1(),a=h.indexOf('<div class="card"><h2>Contas ativas'),on=F.map((f,i)=>[f,i]).filter(([f])=>cur>=f.a&&(f.b==null||cur<=f.b));
+return h.slice(0,a)+`<div class="card"><div class="d-flex justify-content-between align-items-center"><h2 style="margin:0">Contas ativas</h2><button class="btn t btn-sm" onclick="openS('Saldo em banco',inp('bk','Total em banco (R$)',BANK,'number'),()=>{BANK=+V('bk')||0;closeS();R()})">Editar saldo</button></div>
+<div class="mut">Toque numa conta para editar ou excluir.</div><table><tr><th>Conta</th><th>Tipo</th><th>Valor</th></tr>${on.map(([f,i])=>`<tr onclick="finSheet(${i})"><td>${f.n}</td><td class="mut">${f.a==f.b?'Só este mês':f.b==null?'Fixa':'Parcelada'}</td><td class="${f.v>0?'ok':'bad'}">${brl(f.v)}</td></tr>`).join('')}</table></div>`}
+/* DIETA */
+function newD(){dnew=true;sc=null;pick=-1;R()}
+function applyD(){DT.push({name:'Dieta '+(DT.length+1),s:gen()[pick],eat:{}});di=DT.length-1;dnew=false;sc=null;pick=-1;R()}
+function delD(){DT.splice(di,1);di=0;R()}
+function dForm(){const g=gen(),fl=(l,k)=>`<div><span class="lb">${l}</span><input type="number" value="${P[k]}" onchange="P.${k}=+this.value"></div>`;
+return `<div class="card"><h2>Nova dieta · seus dados</h2><div class="g2">${fl('Peso (kg)','peso')}${fl('Altura (cm)','altura')}${fl('Idade','idade')}<div><span class="lb">Sexo</span><select onchange="P.sexo=this.value"><option value="M" ${P.sexo=='M'?'selected':''}>Masculino</option><option value="F" ${P.sexo=='F'?'selected':''}>Feminino</option></select></div></div>
+<span class="lb">Nível de atividade</span><select onchange="P.ativ=+this.value">${ACT.map(a=>`<option value="${a[0]}" ${P.ativ==a[0]?'selected':''}>${a[1]}</option>`).join('')}</select>
+<span class="lb">Objetivo</span><select onchange="P.obj=this.value"><option value="perder" ${P.obj=='perder'?'selected':''}>Perder gordura</option><option value="manter" ${P.obj=='manter'?'selected':''}>Manter / recompor</option><option value="ganhar" ${P.obj=='ganhar'?'selected':''}>Ganhar massa</option></select>
+<button class="btn" style="width:100%" onclick="sc=1;pick=-1;R()">Gerar cenários com IA</button>${DT.length?'<button class="btn t" style="width:100%" onclick="dnew=false;R()">Cancelar</button>':''}</div>
+${sc?g.map(s=>`<div class="card sc ${pick==s.i?'on':''}" onclick="pick=${s.i};R()"><div class="d-flex justify-content-between"><b>${s.n}</b>${s.o==P.obj?'<span class="mut">recomendado</span>':''}</div><div class="big">${s.k} kcal</div><div class="mut" style="color:inherit">P ${s.p}g · C ${s.c}g · G ${s.g}g · fibras ${s.fib}g</div><div class="mini">Variação estimada: ${s.w>0?'+':''}${s.w} kg/semana</div></div>`).join('')+(pick>=0?'<button class="btn" style="width:100%" onclick="applyD()">Aplicar esta dieta</button>':'')+'<p class="mini">IA simulada no mockup (Mifflin-St Jeor + regras da ISSN).</p>':''}`}
+vD=()=>{if(dnew||!DT.length)return dForm();const d=DT[di],s=d.s,k=s.meals.reduce((a,m,i)=>a+(d.eat[i]?m.kc:0),0),p=s.meals.reduce((a,m,i)=>a+(d.eat[i]?m.p:0),0);
+return `<div class="card"><div class="d-flex justify-content-between align-items-center"><h2 style="margin:0">${s.n}</h2><button class="btn t btn-sm" onclick="delD()">Excluir</button></div><div class="big">${s.k} kcal</div><div class="mut">P ${s.p}g · C ${s.c}g · G ${s.g}g · fibras ${s.fib}g</div><div class="mini">Consumido ${k}/${s.k} kcal · proteína ${p}/${s.p} g</div></div>
+<div class="card"><h2>Refeições de hoje</h2><table>${s.meals.map((m,i)=>`<tr><td><b>${m.n}</b><div class="mut">${m.f}</div><div class="mut">${m.kc} kcal · P${m.p} C${m.c} G${m.g}</div></td><td><button class="ck ${d.eat[i]?'on':''}" onclick="DT[${di}].eat[${i}]^=1;R()">✓</button></td></tr>`).join('')}</table></div>
+<div class="card"><h2>Regras aplicadas</h2><div class="mini">• Déficit moderado (~20%) com piso calórico.<br>• Proteína de 1,8–2,2 g/kg em 5 refeições de 20–40 g.<br>• Ceia com caseína (30–40 g).<br>• Gordura mínima de 0,8 g/kg; carboidrato perto do treino.<br>• Fibras: 14 g a cada 1.000 kcal.<br>• Base: ISSN. Estimativa educativa, consulte um nutricionista.</div></div>`}
+/* REMÉDIOS */
+MED.forEach(m=>{m.times=m.h.split('·').map(x=>x.trim());m.days=[0,1,2,3,4,5,6];m.log={}});
+function medSheet(i){const m=i>=0?MED[i]:{n:'',total:'',times:[],days:[0,1,2,3,4,5,6]};
+openS(i>=0?'Editar remédio':'Novo remédio em '+DN[day],inp('mn','Nome e dosagem',m.n)+inp('mt','Total de doses do tratamento',m.total,'number')+inp('mh','Horários (separe por vírgula)',m.times.join(', '))+`<span class="lb">Dias da semana</span><div class="chips" style="display:flex;flex-wrap:wrap">${DN.map((d,k)=>`<button type="button" id="dd${k}" class="chip ${m.days.includes(k)?'on':''}" onclick="this.classList.toggle('on')">${d}</button>`).join('')}</div>`+(i>=0?`<button class="btn t dng" style="margin-top:16px" onclick="MED.splice(${i},1);closeS();R()">Excluir remédio</button>`:''),
+()=>{const n=V('mn').trim(),t=+V('mt'),ds=DN.map((_,k)=>k).filter(k=>$('#dd'+k).classList.contains('on'));if(!n||!t||!ds.length)return;const tm=V('mh').split(',').map(x=>x.trim()).filter(Boolean);
+const o=i>=0?MED[i]:{taken:0,log:{}};Object.assign(o,{n,total:t,times:tm.length?tm:['—'],days:ds});if(i<0)MED.push(o);closeS();R()})}
+function tg(i,t){const m=MED[i],k=day+'_'+t;m.log[k]=!m.log[k];m.taken+=m.log[k]?1:-1;R()}
+vS=()=>{const L=MED.map((m,i)=>[m,i]).filter(([m])=>m.days.includes(day));
+return L.length?L.map(([m,i])=>{const r=m.total-m.taken,pd=m.times.length*m.days.length/7;return `<div class="card"><div class="d-flex justify-content-between align-items-center"><div><b>${m.n}</b><div class="mut">${m.days.length==7?'Todos os dias':m.days.map(d=>DN[d]).join(' · ')}</div></div><button class="btn t btn-sm" onclick="medSheet(${i})">⋯</button></div>
+<div class="big">${r} <span class="mut">doses restantes</span></div><div class="bar"><b style="width:${m.taken/m.total*100}%"></b></div><div class="mini">${r?'~'+Math.ceil(r/pd)+' dias para terminar':'Tratamento concluído'}</div>
+${m.times.map(t=>`<div class="d-flex justify-content-between align-items-center"><span>${t}</span><button class="ck ${m.log[day+'_'+t]?'on':''}" onclick="tg(${i},'${t}')">✓</button></div>`).join('')}</div>`}).join(''):`<div class="card"><h2>Sem remédios em ${DN[day]}</h2><div class="mut">Toque no + para agendar um remédio.</div></div>`}
+/* TOPO */
+const ctx0=ctx;
+ctx=()=>{
+if(tab=='f'){const sal=F.filter(f=>/sal[aá]rio/i.test(f.n)&&f.v>0&&cur>=f.a&&(f.b==null||cur<=f.b)).reduce((a,f)=>a+f.v,0);return ctx0().replace(brl(6500),brl(sal))}
+if(tab=='d'){const pl=DT[di];const ch=DT.length?`<div class="chips dchips">${DT.map((d,i)=>`<button class="chip ${i==di&&!dnew?'on':''}" onclick="di=${i};dnew=false;R()">${d.name}</button>`).join('')}<button class="chip" onclick="newD()">+</button></div>`:'<div class="small text-muted">Crie sua primeira dieta com a IA.</div>';
+if(!pl||dnew)return ch;const k=pl.s.meals.reduce((a,m,i)=>a+(pl.eat[i]?m.kc:0),0);return ch+`<div class="d-flex justify-content-between small"><b>${pl.s.n}</b><span class="text-muted">${k}/${pl.s.k} kcal</span></div><div class="bar"><b style="width:${Math.min(k/pl.s.k*100,100)}%"></b></div>`}
+if(tab=='s'){const L=MED.filter(m=>m.days.includes(day)),tt=L.reduce((a,m)=>a+m.times.length,0),dn=L.reduce((a,m)=>a+m.times.filter(t=>m.log[day+'_'+t]).length,0);
+return `<div class="chips">${DN.map((d,i)=>`<button class="chip ${i==day?'on':''}" onclick="day=${i};R()">${d}${i==new Date().getDay()?' •':''}</button>`).join('')}</div><div class="d-flex justify-content-between small text-muted"><span>${L.length} remédios</span><span>${dn}/${tt} doses</span></div>`}
+return ctx0()}
+R();
+</script>
+<style>
+/* Bootstrap 5.3 mobile: gutter 16, card-body 16, mb-3 = 16, gap-2 = 8, modal 16/16/16 */
+main{padding:var(--s2) var(--s2) calc(96px + env(safe-area-inset-bottom,0px))}
+.card{padding:var(--s2);margin-bottom:var(--s2);border-radius:var(--s2)}
+.card>h2{margin:0 0 var(--s1)}
+.card>h2+*{margin-top:0}
+.big{margin:0}.set{margin:0}.lb{margin:0 0 var(--s1)}
+td,th{padding:var(--s1)}tr{height:var(--s6)}th{height:auto;padding-top:0}
+.g2{gap:var(--s2)}
+.fg{margin-bottom:var(--s2)}.fg:last-child{margin-bottom:0}
+.mdl{position:fixed;z-index:21;left:var(--s2);right:var(--s2);top:50%;transform:translateY(-50%);max-height:calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;border-radius:var(--s3);background:color-mix(in srgb,var(--s) 90%,transparent);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border:1px solid color-mix(in srgb,var(--os) 10%,transparent);box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:var(--s2);border-bottom:1px solid var(--ov)}
+.mh h2{margin:0}
+.mb{padding:var(--s2);overflow:auto;flex:1}
+.mb .g2{margin-bottom:var(--s2)}
+.mb .sc{margin:var(--s2) 0 0}
+.mf{display:flex;justify-content:flex-end;gap:var(--s1);padding:var(--s2);border-top:1px solid var(--ov)}
+/* bottom sheet mobile */
+.mdl{left:0;right:0;top:auto;bottom:0;transform:none;max-height:88dvh;border-radius:var(--s3) var(--s3) 0 0;border-bottom:0;animation:sheetUp .25s ease-out}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+.mdl::before{content:'';display:block;flex:0 0 auto;width:var(--s4);height:4px;border-radius:2px;background:var(--ol);opacity:.5;margin:var(--s1) auto 0}
+.mf{padding-bottom:calc(var(--s2) + env(safe-area-inset-bottom,0px))}
+.mf .btn{flex:1}
+</style>
+<script>
+dnew=false;
+const fgw=h=>h.replace(/<span class="lb">([^<]*)<\/span>(<input[^>]*>|<select[\s\S]*?<\/select>|<div class="chips"[\s\S]*?<\/div>)/g,'<div class="fg"><span class="lb">$1</span>$2</div>');
+openS=function(t,h,s,l='Salvar'){SH={s};$('#sh').innerHTML=`<div class="ov" onclick="closeS()"></div><div class="mdl"><div class="mh"><h2>${t}</h2><button class="btn t btn-sm" onclick="closeS()">✕</button></div><div class="mb" id="sb">${fgw(h)}</div><div class="mf"><button class="btn t" onclick="closeS()">Cancelar</button><button class="btn" onclick="SH.s()">${l}</button></div></div>`};
+add=function(){({t:()=>exSheet(-1),f:()=>finSheet(-1),d:dietSheet,s:()=>medSheet(-1)})[tab]()};
+const R1=R;R=function(){R1();$('#fab').style.display='block'};
+/* DIETA em modal */
+const dRe=()=>{$('#sb').innerHTML=fgw(dietBody())};
+function dietBody(){const g=gen(),fl=(l,k)=>`<div><span class="lb">${l}</span><input type="number" value="${P[k]}" onchange="P.${k}=+this.value"></div>`;
+return `<div class="g2">${fl('Peso (kg)','peso')}${fl('Altura (cm)','altura')}${fl('Idade','idade')}<div><span class="lb">Sexo</span><select onchange="P.sexo=this.value"><option value="M" ${P.sexo=='M'?'selected':''}>Masculino</option><option value="F" ${P.sexo=='F'?'selected':''}>Feminino</option></select></div></div>
+<span class="lb">Nível de atividade</span><select onchange="P.ativ=+this.value">${ACT.map(a=>`<option value="${a[0]}" ${P.ativ==a[0]?'selected':''}>${a[1]}</option>`).join('')}</select>
+<span class="lb">Objetivo</span><select onchange="P.obj=this.value"><option value="perder" ${P.obj=='perder'?'selected':''}>Perder gordura</option><option value="manter" ${P.obj=='manter'?'selected':''}>Manter / recompor</option><option value="ganhar" ${P.obj=='ganhar'?'selected':''}>Ganhar massa</option></select>
+<button class="btn" style="width:100%" onclick="sc=1;pick=-1;dRe()">Gerar cenários com IA</button>
+${sc?g.map(s=>`<div class="card sc ${pick==s.i?'on':''}" onclick="pick=${s.i};dRe()"><div class="d-flex justify-content-between"><b>${s.n}</b>${s.o==P.obj?'<span class="mut">recomendado</span>':''}</div><div class="big">${s.k} kcal</div><div class="mut" style="color:inherit">P ${s.p}g · C ${s.c}g · G ${s.g}g</div><div class="mini">${s.w>0?'+':''}${s.w} kg/semana</div></div>`).join(''):''}`}
+function dietSheet(){sc=null;pick=-1;openS('Nova dieta',dietBody(),applyD,'Aplicar dieta')}
+applyD=function(){if(pick<0)return;DT.push({name:'Dieta '+(DT.length+1),s:gen()[pick],eat:{}});di=DT.length-1;sc=null;pick=-1;closeS();R()};
+const vD2=vD;
+vD=()=>DT.length?vD2():'<div class="card"><h2>Nenhuma dieta ainda</h2><div class="mut">Toque no + para criar sua dieta com a IA.</div></div>';
+/* FINANCEIRO enxuto */
+const vF2=vF;
+vF=()=>vF2().replace(/<div style="font-size:12px">Saldo projetado[\s\S]*?<\/div>/,'').replace(/<button class="btn t btn-sm" onclick="openS\('Saldo[\s\S]*?Editar saldo<\/button>/,'').replace('Contas ativas','Entradas e saídas');
+const ctx2=ctx;
+ctx=()=>{if(tab=='f'){const x=fin();return `<div class="d-flex justify-content-between align-items-center"><button class="btn t btn-sm" onclick="cur--;R()">‹</button><b>${x.lbl}</b><span class="badge ${x.r>=0?'ok':'bad'}">${x.r>=0?'Lucro':'Prejuízo'} ${brl(x.r)}</span><button class="btn t btn-sm" onclick="cur++;R()">›</button></div>`}
+if(tab=='d')return ctx2().replace('<button class="chip" onclick="newD()">+</button>','').replace('Crie sua primeira dieta com a IA.','Nenhuma dieta ainda.');return ctx2()};
+R();
+</script>
+<style>
+/* Layout fluido: app ocupa a viewport inteira; menu no fluxo, colado na borda de baixo */
+html,body{height:100%;max-width:100vw;overflow:hidden}
+:root{padding:0}
+#app{position:fixed;top:0;bottom:0;left:0;right:0;height:auto;width:100%;max-width:560px;margin:0 auto;padding-top:env(safe-area-inset-top,0px)}
+header,#top{padding-left:max(var(--s2),env(safe-area-inset-left));padding-right:max(var(--s2),env(safe-area-inset-right))}
+main{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:var(--s2) max(var(--s2),env(safe-area-inset-right)) var(--s2) max(var(--s2),env(safe-area-inset-left))}
+nav{position:static;flex:none;width:100%;left:auto;right:auto;bottom:auto;padding:var(--s1) max(var(--s2),env(safe-area-inset-right)) calc(var(--s1) + env(safe-area-inset-bottom,0px)) max(var(--s2),env(safe-area-inset-left))}
+.fab{bottom:calc(88px + env(safe-area-inset-bottom,0px));right:max(var(--s2),calc((100vw - 560px)/2 + var(--s2)))}
+.mdl{max-width:560px;margin:0 auto}
+.card b,.card .mut{overflow-wrap:anywhere}
+@media(max-width:359px){#top .chip{font-size:12px}.gi{width:56px}nav button{font-size:10px}.card{padding:12px}}
+</style>
+<style>
+#top:empty{display:none}
+input,select{font-size:16px}
+.dm{display:flex;gap:var(--s1);margin-bottom:var(--s2)}
+.dm .btn{flex:1;height:var(--s5);padding:0 var(--s2);font-size:13px;border:1px solid var(--ov)}
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s2);background:radial-gradient(60% 40% at 20% 15%,color-mix(in srgb,var(--p) 34%,transparent),transparent),radial-gradient(60% 40% at 85% 85%,color-mix(in srgb,#E5487A 22%,transparent),transparent),var(--s);transition:opacity .3s}
+#splash.h{opacity:0;pointer-events:none}
+#splash h1{margin:0;font:500 32px/40px Roboto,system-ui;letter-spacing:.5px}
+#splash svg{animation:pop .6s ease-out;filter:drop-shadow(0 12px 32px color-mix(in srgb,var(--p) 45%,transparent))}
+@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
+</style>
+<script>
+/* DIETA única */
+const vD3=()=>{if(!DT.length)return '<div class="card"><h2>Nenhuma dieta ainda</h2><div class="mut">Toque no + para criar sua dieta com a IA.</div></div>';
+const d=DT[0],s=d.s,k=s.meals.reduce((a,m,i)=>a+(d.eat[i]?m.kc:0),0),p=s.meals.reduce((a,m,i)=>a+(d.eat[i]?m.p:0),0);
+return `<div class="dm"><button class="btn t" onclick="dietSheet()">Nova dieta</button><button class="btn t dng" onclick="delD()">Excluir</button></div>
+<div class="card"><h2>${s.n}</h2><div class="big">${s.k} kcal</div><div class="mut">P ${s.p}g · C ${s.c}g · G ${s.g}g · fibras ${s.fib}g</div><div class="mini">Consumido ${k}/${s.k} kcal · proteína ${p}/${s.p} g</div><div class="bar"><b style="width:${Math.min(k/s.k*100,100)}%"></b></div></div>
+<div class="card"><h2>Refeições de hoje</h2><table>${s.meals.map((m,i)=>`<tr><td><b>${m.n}</b><div class="mut">${m.f}</div><div class="mut">${m.kc} kcal · P${m.p} C${m.c} G${m.g}</div></td><td><button class="ck ${d.eat[i]?'on':''}" onclick="DT[0].eat[${i}]^=1;R()">✓</button></td></tr>`).join('')}</table></div>
+<div class="card"><h2>Regras aplicadas</h2><div class="mini">• Déficit moderado (~20%) com piso calórico.<br>• Proteína de 1,8–2,2 g/kg em 5 refeições de 20–40 g.<br>• Ceia com caseína (30–40 g).<br>• Gordura mínima de 0,8 g/kg; carboidrato perto do treino.<br>• Fibras: 14 g a cada 1.000 kcal.<br>• Base: ISSN. Estimativa educativa, consulte um nutricionista.</div></div>`};
+vD=vD3;
+delD=function(){DT=[];di=0;R()};
+applyD=function(){if(pick<0)return;DT=[{name:'Dieta',s:gen()[pick],eat:{}}];di=0;sc=null;pick=-1;closeS();R()};
+const ctx3=ctx;ctx=()=>tab=='d'?'':ctx3();
+/* Persistência local */
+const SK='lifeplus.v1';
+function save(){try{localStorage.setItem(SK,JSON.stringify({W,F,P,MED,DT}))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem(SK)||'null');if(!d)return;for(const k of Object.keys(W))delete W[k];Object.assign(W,d.W);F.length=0;F.push(...d.F);Object.assign(P,d.P);MED.length=0;MED.push(...d.MED);DT=d.DT||[]}catch(e){}}
+document.addEventListener('input',save);document.addEventListener('change',save);
+const R5=R;R=function(){R5();save()};
+load();R();
+/* Splash 1s */
+setTimeout(()=>{const s=$('#splash');s.classList.add('h');setTimeout(()=>s.remove(),350)},1000);
+</script>
+<style>
+main>header{padding:0 0 var(--s2)}
+main>#top{padding:0 0 var(--s2);background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
+</style>
+<script>
+const HD=$('header'),TP=$('#top');
+const R6=R;R=function(){const a=$('#app');if(!HD.isConnected)a.insertBefore(HD,a.firstChild);if(!TP.isConnected)a.insertBefore(TP,$('#m'));R6();const m=$('#m');m.prepend(TP);m.prepend(HD)};
+R();
+</script>
+<style>
+/* Treino: espaçamento vertical entre linhas de séries */
+.card>.set{margin-top:var(--s2);gap:var(--s2)}
+.card>.set.mut{margin-top:var(--s2)}
+b+.mut,b+div.mut{margin-top:var(--s1)}
+@media(max-width:359px){.card>.set{gap:var(--s1)}}
+</style>
+<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})</script></body></html>

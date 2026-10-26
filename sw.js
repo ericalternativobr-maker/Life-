@@ -1,0 +1,1 @@
+const C='lifeplus-v1',A=['./','index.html','manifest.webmanifest','icon-180.png','icon-192.png','icon-512.png'];self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(A))));self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).then(r=>{const c=r.clone();caches.open(C).then(x=>x.put(e.request,c));return r}).catch(()=>caches.match(e.request))));
